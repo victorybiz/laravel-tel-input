@@ -4,7 +4,7 @@ namespace Victorybiz\LaravelTelInput;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Victorybiz\LaravelTelInput\LaravelTelInput;
+use Illuminate\Support\Facades\View;
 
 class LaravelTelInputServiceProvider extends ServiceProvider
 {
