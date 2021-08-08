@@ -7,9 +7,10 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
 ![GitHub Actions](https://github.com/victorybiz/laravel-tel-input/actions/workflows/main.yml/badge.svg)
 
 ### DEMO PREVIEW
-
+1. Simple Usage Demo
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo.gif) 
-
+2. Country Sync Demo
+![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo2.gif) 
 
 ## Table of Contents
 
