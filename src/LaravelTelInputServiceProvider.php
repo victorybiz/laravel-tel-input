@@ -27,9 +27,9 @@ class LaravelTelInputServiceProvider extends ServiceProvider
             ], 'laravel-tel-input:config');
 
             // Publishing the views.
-            $this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-tel-input'),
-            ], 'laravel-tel-input:views');
+            // $this->publishes([
+            //     __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-tel-input'),
+            // ], 'laravel-tel-input:views');
 
             // Publishing assets.
             /*$this->publishes([
@@ -47,6 +47,21 @@ class LaravelTelInputServiceProvider extends ServiceProvider
 
         // Registering the blade components.
         Blade::component(config('laravel-tel-input.component-name', 'tel-input'), LaravelTelInput::class);
+
+        Blade::directive('laravelTelInputStyles', function () {
+            return view('laravel-tel-input::styles')->render();
+        });
+
+        Blade::directive('laravelTelInputScripts', function () {            
+            return view('laravel-tel-input::scripts')->render();
+        });
+
+        View::composer('laravel-tel-input::assets', function ($view) {
+            // $view->cssPath = __DIR__ . '/../public/laravel-tel-input.css';
+            // $view->jsPath = __DIR__.'/../public/laravel-tel-input.js';
+            $view->cssPath = __DIR__ . '/../resources/css/laravel-tel-input.css';
+            $view->jsPath = __DIR__.'/../resources/js/laravel-tel-input.js';
+        });
     }
 
     /**

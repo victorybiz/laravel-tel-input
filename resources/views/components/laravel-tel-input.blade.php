@@ -35,16 +35,3 @@
     autocomplete="off"
   >
 </span>
-
-{{-- Assets --}}
-@once
-
-  @push('styles')
-    @include('simple-select::components.style')
-  @endpush
-
-  @push('scripts')
-    @include('simple-select::components.script')
-  @endpush
-
-@endonce
