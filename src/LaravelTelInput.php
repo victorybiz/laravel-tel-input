@@ -2,7 +2,9 @@
 
 namespace Victorybiz\LaravelTelInput;
 
-class LaravelTelInput
+use Illuminate\View\Component;
+
+class LaravelTelInput extends Component {
 {
     public $id;
     public $name;
