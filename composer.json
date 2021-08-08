@@ -12,7 +12,7 @@
         "livewire",
         "laravel-livewire",
         "laravel-blade",
-        "blade",
+        "blade"
     ],
     "homepage": "https://github.com/victorybiz/laravel-tel-input",
     "license": "MIT",
