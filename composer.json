@@ -3,7 +3,7 @@
     "description": "Laravel Telephone Input component for Blade and Livewire based on the intl-tel-input JavaScript plugin. ",
     "keywords": [
         "victorybiz",
-        "laravel-tel-input"
+        "laravel-tel-input",
         "tel-input",
         "intl-tel-input",
         "telephone-input",
