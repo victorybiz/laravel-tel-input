@@ -11,7 +11,7 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
    
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo.gif) 
 
-1. Country Sync Demo
+2. Country Sync Demo
    
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo2.gif) 
 
