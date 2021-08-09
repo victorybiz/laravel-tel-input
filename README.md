@@ -29,9 +29,11 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
         - [Add hidden phone-country-input](#add-hidden-phone-country-input)
         - [Usage with Livewire](#usage-with-livewire)
         - [Sync tel-input wih a country dropdown](#sync-tel-input-wih-a-country-dropdown)
+        - [Event Listener](#event-listener)
   - [Props / Attributes](#props--attributes)
-    - [Testing](#testing)
-    - [Changelog](#changelog)
+  - [Events](#events)
+  - [Testing](#testing)
+  - [Changelog](#changelog)
   - [Contributing](#contributing)
     - [Security](#security)
   - [Credits](#credits)
@@ -177,6 +179,20 @@ Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel
 </div>
 ```
 
+<a name="event-listener"></a>
+
+##### Event Listener
+```javascript
+input.addEventListener('telchange', function(e) {
+    console.log(e.detail.valid); // Boolean: Validation status of the number
+    console.log(e.detail.validNumber); // Returns internationally formatted number if number is valid and empty string if invalid
+    console.log(e.detail.number); // Returns the user entered number, maybe auto-formatted internationally
+    console.log(e.detail.country); // Returns the phone country iso2
+    console.log(e.detail.countryName); // Returns the phone country name
+    console.log(e.detail.dialCode); // Returns the dial code
+});
+```
+
 <a name="props"></a>
 
 ## Props / Attributes
@@ -192,10 +208,18 @@ Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel
 | **required** | `Boolean` | `false` | No | Equivalent to the `required` attribute on `<input>` input. | 
 | **disabled** | `Boolean` | `false` | No | Equivalent to the `disabled` attribute on `<input>` input. | 
 
+<a name="events"></a>
+
+## Events
+
+| Name | Listen to |  Description |
+| --- | --- |  --- |
+| **telchange** | `telchange` | Emitted when tel input value change. See [example](#event-listener) above. |
+
 
 <a name="testing"></a>
 
-### Testing
+## Testing
 
 ```bash
 composer test
@@ -203,7 +227,7 @@ composer test
 
 <a name="changelog"></a>
 
-### Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
