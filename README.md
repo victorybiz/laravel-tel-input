@@ -16,7 +16,27 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo2.gif) 
 
 ## Table of Contents
-
+- [Laravel Telephone Input](#laravel-telephone-input)
+    - [DEMO PREVIEW](#demo-preview)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Directives](#directives)
+  - [Requirements](#requirements)
+    - [Core Dependencies](#core-dependencies)
+  - [Configuration](#configuration)
+  - [Usage](#usage)
+        - [Basic usage](#basic-usage)
+        - [Add hidden phone-country-input](#add-hidden-phone-country-input)
+        - [Usage with Livewire](#usage-with-livewire)
+        - [Sync tel-input wih a country dropdown](#sync-tel-input-wih-a-country-dropdown)
+  - [Props / Attributes](#props--attributes)
+    - [Testing](#testing)
+    - [Changelog](#changelog)
+  - [Contributing](#contributing)
+    - [Security](#security)
+  - [Credits](#credits)
+  - [License](#license)
+  - [Laravel Package Boilerplate](#laravel-package-boilerplate)
 
 <br>
 
@@ -29,6 +49,8 @@ You can install the package via composer:
 ```bash
 composer require victorybiz/laravel-tel-input
 ```
+
+<a name="directives"></a>
 
 ## Directives
 Place the `@laravelTelInputStyles` in the `<head>` section of your template before any of your other styles. Place the `@laravelTelInputScripts` directive in your template right before your closing `</body`> tag and after scripts from libraries like Livewire.
@@ -47,6 +69,8 @@ Place the `@laravelTelInputStyles` in the `<head>` section of your template befo
 </html>
 ```
 
+<a name="requirements"></a>
+
 ## Requirements
 This package use the following packages.
 * International Telephone Input (https://github.com/jackocnr/intl-tel-input) 
@@ -54,7 +78,7 @@ This package use the following packages.
 
 Please make sure you install and include these dependencies before using this component. 
 
-<a name="javaScript-dependencies"></a>
+<a name="core-dependencies"></a>
 
 ### Core Dependencies
 This package uses [intl-tel-input](https://github.com/jackocnr/intl-tel-input) under the hood. For the dependency, we recommend you install them through npm or yarn, and then require them in your project's JavaScript. To install each of the dependencies this package makes use of, run this command in the terminal:
@@ -82,6 +106,8 @@ If you’re using the compiled JavaScript, don’t forget to include the downloa
 
 Place the @fcStyles in the <head> before any of your other styles. Place the @fcScripts directive right before your closing </body> tag and after scripts from libraries like Livewire.
 
+<a name="configuration"></a>
+
 ## Configuration
 To customize the component, you should publish the configuration file using the `vendor:publish` Artisan command. The configuration file will be placed in your application's config directory:
 
@@ -91,7 +117,6 @@ php artisan vendor:publish --tag=laravel-tel-input:config
 ```
 Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel-input) for plugin options.
 
-<a name="requirements"></a>
 
 <a name="usage"></a>
 
@@ -168,6 +193,7 @@ Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel
 | **disabled** | `Boolean` | `false` | No | Equivalent to the `disabled` attribute on `<input>` input. | 
 
 
+<a name="testing"></a>
 
 ### Testing
 
@@ -175,22 +201,32 @@ Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel
 composer test
 ```
 
+<a name="changelog"></a>
+
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
+<a name="contributing"></a>
 
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
+<a name="security"></a>
+
 ### Security
 
 If you discover any security related issues, please email lavictorybiz@gmail.com instead of using the issue tracker.
+
+<a name="credits"></a>
 
 ## Credits
 
 -   [Victory Osayi Airuoyuwa](https://github.com/victorybiz)
 -   [All Contributors](../../contributors)
+
+<a name="license"></a>
 
 ## License
 
