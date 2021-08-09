@@ -46,7 +46,7 @@ return [
          * 
          * see: https://github.com/jackocnr/intl-tel-input#initialisation-options
          */
-        'geoIpLookup' => 'CustomFunctionName',
+        'geoIpLookup' => 'ipinfo',
 
         'initialCountry' => 'auto',
 
