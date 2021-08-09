@@ -49,14 +49,14 @@ class LaravelTelInputServiceProvider extends ServiceProvider
         Blade::component(config('laravel-tel-input.component-name', 'tel-input'), LaravelTelInput::class);
 
         Blade::directive('laravelTelInputStyles', function () {
-            return view('laravel-tel-input::styles')->render();
+            return "<?php echo \\Victorybiz\\LaravelTelInput\\LaravelTelInputAssetLoader::outputStyles(); ?>";
         });
 
         Blade::directive('laravelTelInputScripts', function () {            
-            return view('laravel-tel-input::scripts')->render();
+            return "<?php echo \\Victorybiz\\LaravelTelInput\\LaravelTelInputAssetLoader::outputScripts(); ?>";
         });
 
-        View::composer('laravel-tel-input::assets', function ($view) {
+        View::composer('laravel-tel-input::styles', function ($view) {
             // $view->cssPath = __DIR__ . '/../public/laravel-tel-input.css';
             // $view->jsPath = __DIR__.'/../public/laravel-tel-input.js';
             $view->cssPath = __DIR__ . '/../resources/css/laravel-tel-input.css';
