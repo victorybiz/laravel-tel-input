@@ -81,7 +81,7 @@ If you’re using the compiled JavaScript, don’t forget to include the downloa
 Place the @fcStyles in the <head> before any of your other styles. Place the @fcScripts directive right before your closing </body> tag and after scripts from libraries like Livewire.
 
 ## Configuration
-To customize the component, you should publish the configuration file using the vendor:publish Artisan command. The configuration file will be placed in your application's config directory:
+To customize the component, you should publish the configuration file using the `vendor:publish` Artisan command. The configuration file will be placed in your application's config directory:
 
 ```bash
 # Publish the config file
