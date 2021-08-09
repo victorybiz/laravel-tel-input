@@ -4,12 +4,12 @@ namespace Victorybiz\LaravelTelInput;
 
 final class LaravelTelInputAssetLoader
 {
-    public function outputStyles()
+    public static function outputStyles()
     {
         return view('laravel-tel-input::styles');
     }
 
-    public function outputScripts()
+    public static function outputScripts()
     {
         return view('laravel-tel-input::scripts');
     }
