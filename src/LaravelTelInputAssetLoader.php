@@ -6,11 +6,11 @@ final class LaravelTelInputAssetLoader
 {
     public static function outputStyles()
     {
-        return view('laravel-tel-input::styles');
+        return view('laravel-tel-input::assets')->withType('styles');
     }
 
     public static function outputScripts()
     {
-        return view('laravel-tel-input::scripts');
+        return view('laravel-tel-input::assets')->withType('scripts');
     }
 }

@@ -9,6 +9,7 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
 ### DEMO PREVIEW
 1. Simple Usage Demo
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo.gif) 
+<br>
 2. Country Sync Demo
 ![preview](https://github.com/victorybiz/laravel-tel-input/raw/main/demo2.gif) 
 
@@ -27,19 +28,22 @@ You can install the package via composer:
 composer require victorybiz/laravel-tel-input
 ```
 
-**OPTIONAL**: To customize the component, you should publish the configuration file using the vendor:publish Artisan command. The configuration file will be placed in your application's config directory and view file in views directory respectively:
+## Directives
+Place the `@laravelTelInputStyles` in the `<head>` section of your template before any of your other styles. Place the `@laravelTelInputScripts` directive in your template right before your closing `</body`> tag and after scripts from libraries like Livewire.
+```html
+<html>
+  <head>
+    <!-- ... -->
+    @laravelTelInputStyles
+    <!-- ... -->
+  </head>
+<body>
+    <!-- content -->
 
-```bash
-# Publish the config file
-php artisan vendor:publish --tag=laravel-tel-input:config
+    @laravelTelInputScripts
+</body>
+</html>
 ```
-```bash
-# Publish the view file
-php artisan vendor:publish --tag=laravel-tel-input:views
-```
-Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel-input) for plugin options.
-
-<a name="requirements"></a>
 
 ## Requirements
 This package use the following packages.
@@ -72,6 +76,20 @@ Import CSS:
 
 
 If you’re using the compiled JavaScript, don’t forget to include the download or CDN versions of the dependencies before it. Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel-input) for additional installation steps.
+
+
+Place the @fcStyles in the <head> before any of your other styles. Place the @fcScripts directive right before your closing </body> tag and after scripts from libraries like Livewire.
+
+## Configuration
+To customize the component, you should publish the configuration file using the vendor:publish Artisan command. The configuration file will be placed in your application's config directory:
+
+```bash
+# Publish the config file
+php artisan vendor:publish --tag=laravel-tel-input:config
+```
+Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel-input) for plugin options.
+
+<a name="requirements"></a>
 
 <a name="usage"></a>
 

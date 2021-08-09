@@ -55,12 +55,10 @@ class LaravelTelInputServiceProvider extends ServiceProvider
             return "<?php echo \\Victorybiz\\LaravelTelInput\\LaravelTelInputAssetLoader::outputScripts(); ?>";
         });
 
-        View::composer('laravel-tel-input::styles', function ($view) {
+        View::composer('laravel-tel-input::assets', function ($view) {
             // $view->cssPath = __DIR__ . '/../public/laravel-tel-input.css';
-            $view->cssPath = __DIR__ . '/../resources/css/laravel-tel-input.css';
-        });
-        View::composer('laravel-tel-input::scripts', function ($view) {
             // $view->jsPath = __DIR__.'/../public/laravel-tel-input.js';
+            $view->cssPath = __DIR__ . '/../resources/css/laravel-tel-input.css';
             $view->jsPath = __DIR__.'/../resources/js/laravel-tel-input.js';
         });
     }
