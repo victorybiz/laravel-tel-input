@@ -136,20 +136,24 @@
         // phone country input data
         if (this.dataset.phoneCountryInput && countryData.iso2) {
           const phoneCountryInput = document.querySelector(this.dataset.phoneCountryInput);
-          let oldValue = phoneCountryInput.value?.trim();
-          phoneCountryInput.value = countryData.iso2?.toUpperCase();
-          if (phoneCountryInput.value !== oldValue || phoneCountryInput.value != '') {
-            phoneCountryInput.dispatchEvent(new KeyboardEvent('change'));
+          if (phoneCountryInput) {
+            let oldValue = phoneCountryInput.value?.trim();
+            phoneCountryInput.value = countryData.iso2?.toUpperCase();
+            if (phoneCountryInput.value !== oldValue || phoneCountryInput.value != '') {
+              phoneCountryInput.dispatchEvent(new KeyboardEvent('change'));
+            }
           }
         }
         // phone dial code input data
         if (this.dataset.phoneDialCodeInput && countryData.dialCode) {
           const phoneDialCodeInput = document.querySelector(this.dataset.phoneDialCodeInput);
-          let oldValue = phoneDialCodeInput.value;
-          phoneDialCodeInput.value = countryData.dialCode;
-          if (phoneDialCodeInput.value !== oldValue || phoneDialCodeInput.value != '') {
-            phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
-          }        
+          if (phoneDialCodeInput) {
+            let oldValue = phoneDialCodeInput.value;
+            phoneDialCodeInput.value = countryData.dialCode;
+            if (phoneDialCodeInput.value !== oldValue || phoneDialCodeInput.value != '') {
+              phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
+            }  
+          }      
         }
         // once country change trigger change event on the telephone input
         telInput.dispatchEvent(new KeyboardEvent('change'));
@@ -160,42 +164,30 @@
     const telInputChangeEventFunc = function () {
       // phone input data
       if (this.dataset.phoneInput) {
-        const phoneInput = document.querySelector(this.dataset.phoneInput);      
-        let oldValue = phoneInput.value?.trim();
-        if (oldValue != '' && oldValue.charAt(0) != '+'  && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
-          oldValue = `+${oldValue}`;
-          phoneInput.value = oldValue;
-        }
-        if (itiPhone.getNumber()?.trim() != '') {          
-          if (itiPhone.isValidNumber()) {
-            phoneInput.value = itiPhone.getNumber();
-          } else {
-            phoneInput.value = '';
+        const phoneInput = document.querySelector(this.dataset.phoneInput);    
+        if (phoneInput) {  
+          let oldValue = phoneInput.value?.trim();
+          if (oldValue != '' && oldValue.charAt(0) != '+'  && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
+            oldValue = `+${oldValue}`;
+            phoneInput.value = oldValue;
           }
-        } else {
-          if (oldValue != '' && itiPhone.isValidNumber() === null) {
-            itiPhone.setNumber(oldValue);        
-            phoneInput.value = itiPhone.getNumber();
-          }        
-        }
-        if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
-          phoneInput.dispatchEvent(new KeyboardEvent('change'));
-          phoneInput.dispatchEvent(new CustomEvent('telchange', {
-            detail: {
-              valid: true,
-              validNumber: phoneInput.value,
-              number: itiPhone.getNumber(),
-              country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
-              countryName: itiPhone.getSelectedCountryData().name,
-              dialCode: itiPhone.getSelectedCountryData().dialCode            
+          if (itiPhone.getNumber()?.trim() != '') {          
+            if (itiPhone.isValidNumber()) {
+              phoneInput.value = itiPhone.getNumber();
+            } else {
+              phoneInput.value = '';
             }
-          }));
-        } else {
-          if (itiPhone.isValidNumber() === false) {
-            phoneInput.dispatchEvent(new KeyboardEvent('change'));  
+          } else {
+            if (oldValue != '' && itiPhone.isValidNumber() === null) {
+              itiPhone.setNumber(oldValue);        
+              phoneInput.value = itiPhone.getNumber();
+            }        
+          }
+          if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
+            phoneInput.dispatchEvent(new KeyboardEvent('change'));
             phoneInput.dispatchEvent(new CustomEvent('telchange', {
               detail: {
-                valid: false,
+                valid: true,
                 validNumber: phoneInput.value,
                 number: itiPhone.getNumber(),
                 country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
@@ -203,6 +195,20 @@
                 dialCode: itiPhone.getSelectedCountryData().dialCode            
               }
             }));
+          } else {
+            if (itiPhone.isValidNumber() === false) {
+              phoneInput.dispatchEvent(new KeyboardEvent('change'));  
+              phoneInput.dispatchEvent(new CustomEvent('telchange', {
+                detail: {
+                  valid: false,
+                  validNumber: phoneInput.value,
+                  number: itiPhone.getNumber(),
+                  country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
+                  countryName: itiPhone.getSelectedCountryData().name,
+                  dialCode: itiPhone.getSelectedCountryData().dialCode            
+                }
+              }));
+            }
           }
         }
       }    
@@ -240,12 +246,26 @@
 
     // After each intlTelInput instance has been created, fix issues with pre-filled values by dispatching change event on the country dropdown
     telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+    // Fix issues working on page with Turbolinks enabled
+    document.addEventListener("turbolinks:load", function() { 
+      if (telInput) {
+        telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+      }
+    });
+    // Fix issues working on page with Turbo enabled
+    document.addEventListener("turbo:load", function() { 
+      if (telInput) {
+        telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+      }
+    });
   }
 
   // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
   const telInputconfig = laravelTelInputConfig; // laravelTelInputConfig will be defined in blade
   const telInputs = document.querySelectorAll(".iti--laravel-tel-input");
-  for (let i = 0; i < telInputs.length; i++) {
-    initTelInput(telInputs[i], telInputconfig);
-  } 
+  if (telInputs.length > 0) {
+    for (let i = 0; i < telInputs.length; i++) {
+      initTelInput(telInputs[i], telInputconfig);
+    } 
+  }
 })();

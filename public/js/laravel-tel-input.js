@@ -158,25 +158,31 @@ if (typeof window.intlTelInput !== 'function') {
         setCookie(IntlTelInputSelectedCountryCookie, (_countryData$iso = countryData.iso2) === null || _countryData$iso === void 0 ? void 0 : _countryData$iso.toUpperCase()); // phone country input data
 
         if (this.dataset.phoneCountryInput && countryData.iso2) {
-          var _phoneCountryInput$va, _countryData$iso2;
-
           var phoneCountryInput = document.querySelector(this.dataset.phoneCountryInput);
-          var oldValue = (_phoneCountryInput$va = phoneCountryInput.value) === null || _phoneCountryInput$va === void 0 ? void 0 : _phoneCountryInput$va.trim();
-          phoneCountryInput.value = (_countryData$iso2 = countryData.iso2) === null || _countryData$iso2 === void 0 ? void 0 : _countryData$iso2.toUpperCase();
 
-          if (phoneCountryInput.value !== oldValue || phoneCountryInput.value != '') {
-            phoneCountryInput.dispatchEvent(new KeyboardEvent('change'));
+          if (phoneCountryInput) {
+            var _phoneCountryInput$va, _countryData$iso2;
+
+            var oldValue = (_phoneCountryInput$va = phoneCountryInput.value) === null || _phoneCountryInput$va === void 0 ? void 0 : _phoneCountryInput$va.trim();
+            phoneCountryInput.value = (_countryData$iso2 = countryData.iso2) === null || _countryData$iso2 === void 0 ? void 0 : _countryData$iso2.toUpperCase();
+
+            if (phoneCountryInput.value !== oldValue || phoneCountryInput.value != '') {
+              phoneCountryInput.dispatchEvent(new KeyboardEvent('change'));
+            }
           }
         } // phone dial code input data
 
 
         if (this.dataset.phoneDialCodeInput && countryData.dialCode) {
           var phoneDialCodeInput = document.querySelector(this.dataset.phoneDialCodeInput);
-          var _oldValue = phoneDialCodeInput.value;
-          phoneDialCodeInput.value = countryData.dialCode;
 
-          if (phoneDialCodeInput.value !== _oldValue || phoneDialCodeInput.value != '') {
-            phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
+          if (phoneDialCodeInput) {
+            var _oldValue = phoneDialCodeInput.value;
+            phoneDialCodeInput.value = countryData.dialCode;
+
+            if (phoneDialCodeInput.value !== _oldValue || phoneDialCodeInput.value != '') {
+              phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
+            }
           }
         } // once country change trigger change event on the telephone input
 
@@ -189,58 +195,61 @@ if (typeof window.intlTelInput !== 'function') {
     var telInputChangeEventFunc = function telInputChangeEventFunc() {
       // phone input data
       if (this.dataset.phoneInput) {
-        var _phoneInput$value, _itiPhone$getNumber;
-
         var phoneInput = document.querySelector(this.dataset.phoneInput);
-        var oldValue = (_phoneInput$value = phoneInput.value) === null || _phoneInput$value === void 0 ? void 0 : _phoneInput$value.trim();
 
-        if (oldValue != '' && oldValue.charAt(0) != '+' && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
-          oldValue = "+".concat(oldValue);
-          phoneInput.value = oldValue;
-        }
+        if (phoneInput) {
+          var _phoneInput$value, _itiPhone$getNumber;
 
-        if (((_itiPhone$getNumber = itiPhone.getNumber()) === null || _itiPhone$getNumber === void 0 ? void 0 : _itiPhone$getNumber.trim()) != '') {
-          if (itiPhone.isValidNumber()) {
-            phoneInput.value = itiPhone.getNumber();
-          } else {
-            phoneInput.value = '';
+          var oldValue = (_phoneInput$value = phoneInput.value) === null || _phoneInput$value === void 0 ? void 0 : _phoneInput$value.trim();
+
+          if (oldValue != '' && oldValue.charAt(0) != '+' && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
+            oldValue = "+".concat(oldValue);
+            phoneInput.value = oldValue;
           }
-        } else {
-          if (oldValue != '' && itiPhone.isValidNumber() === null) {
-            itiPhone.setNumber(oldValue);
-            phoneInput.value = itiPhone.getNumber();
-          }
-        }
 
-        if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
-          var _itiPhone$getSelected;
-
-          phoneInput.dispatchEvent(new KeyboardEvent('change'));
-          phoneInput.dispatchEvent(new CustomEvent('telchange', {
-            detail: {
-              valid: true,
-              validNumber: phoneInput.value,
-              number: itiPhone.getNumber(),
-              country: (_itiPhone$getSelected = itiPhone.getSelectedCountryData().iso2) === null || _itiPhone$getSelected === void 0 ? void 0 : _itiPhone$getSelected.toUpperCase(),
-              countryName: itiPhone.getSelectedCountryData().name,
-              dialCode: itiPhone.getSelectedCountryData().dialCode
+          if (((_itiPhone$getNumber = itiPhone.getNumber()) === null || _itiPhone$getNumber === void 0 ? void 0 : _itiPhone$getNumber.trim()) != '') {
+            if (itiPhone.isValidNumber()) {
+              phoneInput.value = itiPhone.getNumber();
+            } else {
+              phoneInput.value = '';
             }
-          }));
-        } else {
-          if (itiPhone.isValidNumber() === false) {
-            var _itiPhone$getSelected2;
+          } else {
+            if (oldValue != '' && itiPhone.isValidNumber() === null) {
+              itiPhone.setNumber(oldValue);
+              phoneInput.value = itiPhone.getNumber();
+            }
+          }
+
+          if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
+            var _itiPhone$getSelected;
 
             phoneInput.dispatchEvent(new KeyboardEvent('change'));
             phoneInput.dispatchEvent(new CustomEvent('telchange', {
               detail: {
-                valid: false,
+                valid: true,
                 validNumber: phoneInput.value,
                 number: itiPhone.getNumber(),
-                country: (_itiPhone$getSelected2 = itiPhone.getSelectedCountryData().iso2) === null || _itiPhone$getSelected2 === void 0 ? void 0 : _itiPhone$getSelected2.toUpperCase(),
+                country: (_itiPhone$getSelected = itiPhone.getSelectedCountryData().iso2) === null || _itiPhone$getSelected === void 0 ? void 0 : _itiPhone$getSelected.toUpperCase(),
                 countryName: itiPhone.getSelectedCountryData().name,
                 dialCode: itiPhone.getSelectedCountryData().dialCode
               }
             }));
+          } else {
+            if (itiPhone.isValidNumber() === false) {
+              var _itiPhone$getSelected2;
+
+              phoneInput.dispatchEvent(new KeyboardEvent('change'));
+              phoneInput.dispatchEvent(new CustomEvent('telchange', {
+                detail: {
+                  valid: false,
+                  validNumber: phoneInput.value,
+                  number: itiPhone.getNumber(),
+                  country: (_itiPhone$getSelected2 = itiPhone.getSelectedCountryData().iso2) === null || _itiPhone$getSelected2 === void 0 ? void 0 : _itiPhone$getSelected2.toUpperCase(),
+                  countryName: itiPhone.getSelectedCountryData().name,
+                  dialCode: itiPhone.getSelectedCountryData().dialCode
+                }
+              }));
+            }
           }
         }
       }
@@ -288,7 +297,19 @@ if (typeof window.intlTelInput !== 'function') {
     } // After each intlTelInput instance has been created, fix issues with pre-filled values by dispatching change event on the country dropdown
 
 
-    telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+    telInput.dispatchEvent(new KeyboardEvent('countrychange')); // Fix issues working on page with Turbolinks enabled
+
+    document.addEventListener("turbolinks:load", function () {
+      if (telInput) {
+        telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+      }
+    }); // Fix issues working on page with Turbo enabled
+
+    document.addEventListener("turbo:load", function () {
+      if (telInput) {
+        telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+      }
+    });
   } // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
 
 
@@ -296,8 +317,10 @@ if (typeof window.intlTelInput !== 'function') {
 
   var telInputs = document.querySelectorAll(".iti--laravel-tel-input");
 
-  for (var i = 0; i < telInputs.length; i++) {
-    initTelInput(telInputs[i], telInputconfig);
+  if (telInputs.length > 0) {
+    for (var i = 0; i < telInputs.length; i++) {
+      initTelInput(telInputs[i], telInputconfig);
+    }
   }
 })();
 
