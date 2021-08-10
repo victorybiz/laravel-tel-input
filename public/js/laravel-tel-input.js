@@ -82,11 +82,11 @@ if (typeof window.intlTelInput !== 'function') {
 
   function initTelInput(telInput) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    // allow each input to have its own initialCountry and geoIpLookup
-    window.intlTelInputGlobals.autoCountry = null;
-    window.intlTelInputGlobals.startedLoadingAutoCountry = false; // tel input country cookie
+    // tel input country cookie
+    var IntlTelInputSelectedCountryCookie = "IntlTelInputSelectedCountry_".concat(telInput.dataset.phoneInputId); // allow each input to have its own initialCountry and geoIpLookup
 
-    var IntlTelInputSelectedCountryCookie = "IntlTelInputSelectedCountry_".concat(telInput.dataset.phoneInputId); // fix autofill bugs on page refresh in Firefox
+    window.intlTelInputGlobals.autoCountry = getCookie(IntlTelInputSelectedCountryCookie) || window.intlTelInputGlobals.autoCountry; // window.intlTelInputGlobals.startedLoadingAutoCountry = false;
+    // fix autofill bugs on page refresh in Firefox
 
     var form = telInput.closest('form');
 
@@ -147,7 +147,7 @@ if (typeof window.intlTelInput !== 'function') {
     } // init the tel input
 
 
-    var itiPhone = window.intlTelInput(telInput, options);
+    var itiPhone = window.intlTelInput(telInput, options); // countrychange event function
 
     var countryChangeEventFunc = function countryChangeEventFunc() {
       var countryData = itiPhone.getSelectedCountryData();
@@ -183,9 +183,10 @@ if (typeof window.intlTelInput !== 'function') {
 
         telInput.dispatchEvent(new KeyboardEvent('change'));
       }
-    };
+    }; // countrychange event function
 
-    var telInputEventFunc = function telInputEventFunc() {
+
+    var telInputChangeEventFunc = function telInputChangeEventFunc() {
       // phone input data
       if (this.dataset.phoneInput) {
         var _phoneInput$value, _itiPhone$getNumber;
@@ -243,10 +244,11 @@ if (typeof window.intlTelInput !== 'function') {
           }
         }
       }
-    };
+    }; // Listen the tel inputs events
 
-    telInput.addEventListener('change', telInputEventFunc);
-    telInput.addEventListener('countrychange', countryChangeEventFunc); // sync phone number with tel input
+
+    telInput.addEventListener('countrychange', countryChangeEventFunc);
+    telInput.addEventListener('change', telInputChangeEventFunc); // listen and sync phone number with tel input if any
 
     if (telInput.dataset.phoneInput) {
       var phoneInput = document.querySelector(telInput.dataset.phoneInput);
@@ -270,7 +272,7 @@ if (typeof window.intlTelInput !== 'function') {
           }
         });
       }
-    } // sync phone country with tel input
+    } // listen and sync phone country with tel input if any
 
 
     if (telInput.dataset.phoneCountryInput) {
@@ -283,13 +285,16 @@ if (typeof window.intlTelInput !== 'function') {
           itiPhone.setCountry((_this$value2 = this.value) === null || _this$value2 === void 0 ? void 0 : _this$value2.trim());
         });
       }
-    }
-  } // init all tel inputs
+    } // After each intlTelInput instance has been created, fix issues with pre-filled values by dispatching change event on the country dropdown
+
+
+    telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+  } // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
 
 
   var telInputconfig = laravelTelInputConfig; // laravelTelInputConfig will be defined in blade
 
-  var telInputs = document.querySelectorAll(".phone-input");
+  var telInputs = document.querySelectorAll(".iti--laravel-tel-input");
 
   for (var i = 0; i < telInputs.length; i++) {
     initTelInput(telInputs[i], telInputconfig);

@@ -13,6 +13,7 @@
 <span wire:ignore>
   <input
     type="tel"
+    class="iti--laravel-tel-input {{ $attributes->get('class') }}"
     data-phone-input-id="{{ $id }}"
     data-phone-input-name="{{ $name }}"
     data-phone-input="#{{ $id }}"
@@ -25,7 +26,6 @@
     @if ($attributes->has('placeholder'))
       placeholder="{{ $attributes->get('placeholder') }}"
     @endif
-    class="phone-input {{ $attributes->get('class') }}"
     @if ($attributes->has('required'))
       required
     @endif
