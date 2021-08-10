@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tel-input` will be documented in this file
 
+## v1.1.2 - 2021-08-10
+
+- Fix issues working on page with Turbolinks and Turbo enabled.
+  
 ## v1.1.1 - 2021-08-10
 
 - Multiple tel input instance bug fix.

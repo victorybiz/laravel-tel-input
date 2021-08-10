@@ -23,6 +23,7 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
   - [Directives](#directives)
   - [Requirements](#requirements)
     - [Core Dependencies](#core-dependencies)
+      - [Utilities Script](#utilities-script)
   - [Configuration](#configuration)
   - [Usage](#usage)
         - [Basic usage](#basic-usage)
@@ -106,7 +107,14 @@ Import CSS:
 If you’re using the compiled JavaScript, don’t forget to include the download or CDN versions of the dependencies before it. Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel-input) for additional installation steps.
 
 
-Place the @fcStyles in the <head> before any of your other styles. Place the @fcScripts directive right before your closing </body> tag and after scripts from libraries like Livewire.
+#### Utilities Script
+Update your `webpack.mix.js` to copy the `utils.js ` script to your `public` directory or publish the configuration file to set a custom path.
+
+```javascript
+// webpack.mix.js
+// ...
+mix.copy('node_modules/intl-tel-input/build/js/utils.js', 'public/vendor/intl-tel-input/build/js');
+```
 
 <a name="configuration"></a>
 
