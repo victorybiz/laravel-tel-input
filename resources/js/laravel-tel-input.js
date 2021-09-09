@@ -260,12 +260,28 @@
     });
   }
 
-  // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
-  const telInputconfig = laravelTelInputConfig; // laravelTelInputConfig will be defined in blade
-  const telInputs = document.querySelectorAll(".iti--laravel-tel-input");
-  if (telInputs.length > 0) {
-    for (let i = 0; i < telInputs.length; i++) {
-      initTelInput(telInputs[i], telInputconfig);
-    } 
+  function renderTelInput()
+  {
+    // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
+    const telInputconfig = laravelTelInputConfig; // laravelTelInputConfig will be defined in blade
+    const telInputs = document.querySelectorAll(".iti--laravel-tel-input");
+    if (telInputs.length > 0) {
+      for (let i = 0; i < telInputs.length; i++) {
+        initTelInput(telInputs[i], telInputconfig);
+      } 
+    }
   }
+
+  // Listen to the document ready event and render the tel inputs
+  document.addEventListener("DOMContentLoaded", function() {
+    renderTelInput();
+  });
+  
+  // Livewire hook
+  if (window.Livewire) {
+    window.Livewire.hook('component.initialized', component => {
+      renderTelInput();
+    });
+  }
+  // 
 })();
