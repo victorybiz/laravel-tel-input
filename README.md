@@ -231,8 +231,10 @@ input.addEventListener('telchange', function(e) {
 ## Troubleshooting
 
 - ### tel-input not rendering in Livewire after component update, refresh or change in DOM content.
-  The most common issues encountered by Livewire users has to do with Livewire's DOM diffing/patching system. This is the system that selectively updates elements that have been changed, added, or removed after every component update. 
+  The most common issues encountered by Livewire users has to do with Livewire's DOM diffing/patching system. This is the system that selectively updates elements that have been changed, added, or removed after every component update.
+
   For the most part, this system is reliable, but there are certain cases where Livewire is unable to properly track changes. When this happens, hopefully, a helpful error will be thrown and you can debug with the following guide.
+  
   If a tel-input fails to render after component update like opening popup/modal with a `tel-input` or switch to tab section with a form containing a `tel-input`, to fix this, dispatch a `telDOMChanged` browser event in the action that triggers/opens the popup or form tab.
   ```php
   class ContactPage extends Component
