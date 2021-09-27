@@ -278,16 +278,21 @@
     }
   }
 
-  // Listen to the document ready event and render the tel inputs
+  // Listen to the document events and re-render the tel inputs
   document.addEventListener("DOMContentLoaded", function() {
     renderTelInput();
-  });
-  
-  // Livewire hook
-  if (window.Livewire) {
-    window.Livewire.hook('component.initialized', component => {
+
+    // user dispatched browser events to re-render the tel inputs
+    document.addEventListener("telDOMChanged", function() {
       renderTelInput();
     });
-  }
+
+    // Livewire event hook 
+    if (window.Livewire) {
+      window.Livewire.hook('component.initialized', component => {
+        renderTelInput();
+      });
+    }
+  });
   // 
 })();
