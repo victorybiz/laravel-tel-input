@@ -122,6 +122,12 @@
       delete options.customPlaceholder; // unset if undefined function
     }
 
+    // utilsScript option
+    if (options.utilsScript) {
+      // Fix utilsScript relative path bug
+      options.utilsScript = options.utilsScript.charAt(0) == '/' ? options.utilsScript : '/' + options.utilsScript;
+    }
+
     // init the tel input
     const itiPhone = window.intlTelInput(telInput, options);
    

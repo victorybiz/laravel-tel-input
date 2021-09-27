@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tel-input` will be documented in this file
 
+## v1.1.4 - 2021-09-27
+
+- Fix utilsScript relative path bug
+  
 ## v1.1.3 - 2021-09-09
 
 - Fix input rendering issues on Livewire modals and popups.
