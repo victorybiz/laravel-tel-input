@@ -14,10 +14,17 @@ class LaravelTelInput extends Component
      *
      * @return void
      */
-    public function __construct(string $id, string $name = 'phone')
+    public function __construct(string $id = null, string $name = 'phone')
     {
         $this->id = $id;
         $this->name = $name;
+
+        if (!$this->name) {
+            $this->name = 'phone-' . uniqid();
+        }
+        if (!$this->id) {
+            $this->id = $this->name;
+        }
     }
 
     /**

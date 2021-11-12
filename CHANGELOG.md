@@ -2,10 +2,14 @@
 
 All notable changes to `laravel-tel-input` will be documented in this file
 
+## v1.1.6 - 2021-11-12
+
+- Added default value for `id` props.
+  
 ## v1.1.5 - 2021-09-28
 
 - Fix tel-input not rendering in Livewire after component update, refresh or change in DOM content.
-- 
+  
 ## v1.1.4 - 2021-09-27
 
 - Fix utilsScript relative path bug
