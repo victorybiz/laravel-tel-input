@@ -252,6 +252,12 @@ input.addEventListener('telchange', function(e) {
       //...
   }
   ```
+  In some cases where the popup form contains a tel-input with pre-filled values/phone numbers from the component `mount()` and dispatching browser event is not possible from the component. Add the following javascript codes to the end of of the component blade view.
+  ```html
+  <script wire:ignore>
+    document.dispatchEvent(new Event('telDOMChanged')); 
+  </script>
+  ```
 
 <a name="testing"></a>
 
