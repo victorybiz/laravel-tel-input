@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tel-input` will be documented in this file
 
+## v1.2.0 - 2022-02-09
+
+- Added support for Laravel 9
+  
 ## v1.1.6 - 2021-11-12
 
 - Added default value for `id` props.
