@@ -1,7 +1,6 @@
 {{-- Hidden phone input --}}
 <input
   type="hidden"
-  {{ $attributes->wire('model') }}
   id="{{ $id }}"
   name="{{ $name }}"
   @if ($attributes->has('value'))
@@ -12,6 +11,7 @@
 {{-- Tel input --}}
 <span wire:ignore>
   <input
+    {{ $attributes->wire('model') }}
     type="tel"
     class="iti--laravel-tel-input {{ $attributes->get('class') }}"
     data-phone-input-id="{{ $id }}"
