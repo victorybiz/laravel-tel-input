@@ -7,11 +7,13 @@
     value="{{ $attributes->get('value') }}"
   @endif
   autocomplete="off"
+  @if ($attributes->has('model'))
+    {{ $attributes->wire('model') }}
+  @endif
 >
 {{-- Tel input --}}
 <span wire:ignore>
   <input
-    {{ $attributes->wire('model') }}
     type="tel"
     class="iti--laravel-tel-input {{ $attributes->get('class') }}"
     data-phone-input-id="{{ $id }}"

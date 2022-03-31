@@ -223,6 +223,8 @@
     // Listen the tel inputs events
     telInput.addEventListener('countrychange', countryChangeEventFunc);
     telInput.addEventListener('change', telInputChangeEventFunc);
+    //Added keyup event listener
+    telInput.addEventListener('keyup', telInputChangeEventFunc);
 
     // listen and sync phone number with tel input if any
     if (telInput.dataset.phoneInput) {
