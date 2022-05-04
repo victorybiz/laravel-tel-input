@@ -57,7 +57,7 @@ composer require victorybiz/laravel-tel-input
 <a name="directives"></a>
 
 ## Directives
-Place the `@laravelTelInputStyles` in the `<head>` section of your template before any of your other styles. Place the `@laravelTelInputScripts` directive in your template right before your closing `</body`> tag and after scripts from libraries like Livewire.
+Place the `@laravelTelInputStyles` in the `<head>` section of your template before any of your other styles. Place the `@laravelTelInputScripts` directive in your template right before your closing `</body`> tag and after scripts from libraries like Livewire or any other compiled scripts.
 ```html
 <html>
   <head>
