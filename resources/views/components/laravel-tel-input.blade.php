@@ -1,13 +1,15 @@
 {{-- Hidden phone input --}}
 <input
   type="hidden"
-  {{ $attributes->wire('model') }}
   id="{{ $id }}"
   name="{{ $name }}"
   @if ($attributes->has('value'))
     value="{{ $attributes->get('value') }}"
   @endif
   autocomplete="off"
+  @if ($attributes->has('model'))
+    {{ $attributes->wire('model') }}
+  @endif
 >
 {{-- Tel input --}}
 <span wire:ignore>
@@ -33,5 +35,6 @@
     disabled
     @endif
     autocomplete="off"
+    id="{{"tel_".$id}}"
   >
 </span>
