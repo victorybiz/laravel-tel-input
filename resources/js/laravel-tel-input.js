@@ -1,12 +1,3 @@
-/**
- * International Telephone Input
- */
- if (typeof window.intlTelInput !== 'function') {
-  throw new TypeError(
-    'Laravel-Tel-Input: requires International Telephone Input (https://github.com/jackocnr/intl-tel-input). Please install with NPM or include the CDN.'
-  );
-}
-
 // LaravelTelInput
 (function () {
 
@@ -268,6 +259,11 @@
 
   function renderTelInput()
   {
+    if (typeof window.intlTelInput !== 'function') {
+      throw new TypeError(
+          'Laravel-Tel-Input: requires International Telephone Input (https://github.com/jackocnr/intl-tel-input). Please install with NPM or include the CDN.'
+      );
+    }
     // Call function to initialize an instance of int tel input on all elements with .iti--laravel-tel-input attribute
     const telInputconfig = laravelTelInputConfig; // laravelTelInputConfig will be defined in blade
     const telInputs = document.querySelectorAll(".iti--laravel-tel-input");

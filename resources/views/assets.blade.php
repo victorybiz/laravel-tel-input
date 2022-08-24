@@ -3,13 +3,13 @@
   @isset($cssPath)
     <style>{!! file_get_contents($cssPath) !!}</style>
   @endisset
-  
+
 @elseif($type == 'scripts')
 
   @isset($jsPath)
-    <script>
-      var laravelTelInputConfig = @json(config('laravel-tel-input.options'));
-      {!! file_get_contents($jsPath) !!}
+    <script async>
+        var laravelTelInputConfig = @json(config('laravel-tel-input.options'));
+        {!! file_get_contents($jsPath) !!}
     </script>
   @endisset
 
