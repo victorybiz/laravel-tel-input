@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-tel-input` will be documented in this file
 
+## v1.3.0 - 2023-03-29
+
+- Added support for Laravel 10 by @jbajou in #18
+
 ## v1.2.0 - 2022-02-09
 
 - Added support for Laravel 9
