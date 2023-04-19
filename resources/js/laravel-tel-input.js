@@ -2,7 +2,7 @@
 (function () {
 
   'use strict';
-  
+
   function setCookie(cookieName, cookieValue, expiryDays = null, path = null, domain = null) {
     let cookieString = `${cookieName}=${cookieValue};`
     if (expiryDays) {
@@ -18,7 +18,7 @@
     }
     document.cookie = cookieString;
   }
-  
+
   function getCookie(cookieName) {
     let name = cookieName + "=";
     let ca = document.cookie.split(';');
@@ -67,7 +67,7 @@
     // geoIpLookup option
     if (options.geoIpLookup == null) {
       // unset it if null
-      delete options.geoIpLookup; 
+      delete options.geoIpLookup;
     } else if (options.geoIpLookup === 'ipinfo') {
       options.geoIpLookup = function(success, failure) {
         let country = getCookie(IntlTelInputSelectedCountryCookie);
@@ -75,23 +75,23 @@
           success(country);
         } else {
           fetch('https://ipinfo.io/json')
-          .then( res => res.json() )
-          .then( data => data)
-          .then( (data) => {
-            let country = data.country?.toUpperCase();
-            success(country);
-            setCookie(IntlTelInputSelectedCountryCookie, country);
-          })
-          .catch( error => success('US') );
+              .then( res => res.json() )
+              .then( data => data)
+              .then( (data) => {
+                let country = data.country?.toUpperCase();
+                success(country);
+                setCookie(IntlTelInputSelectedCountryCookie, country);
+              })
+              .catch( error => success('US') );
         }
       }
     } else if (typeof window[options.geoIpLookup] === 'function') {
       // user custom function
-      options.geoIpLookup = window[options.geoIpLookup];      
+      options.geoIpLookup = window[options.geoIpLookup];
     } else {
       if (typeof options.geoIpLookup !== 'function') {
         throw new TypeError(
-          `Laravel-Tel-Input: Undefined function '${options.geoIpLookup}' specified in tel-input.options.geoIpLookup.`
+            `Laravel-Tel-Input: Undefined function '${options.geoIpLookup}' specified in tel-input.options.geoIpLookup.`
         );
       }
       delete options.geoIpLookup; // unset if undefined function
@@ -100,14 +100,14 @@
     // customPlaceholder option
     if (options.customPlaceholder == null) {
       // unset if its null
-      delete options.customPlaceholder; 
+      delete options.customPlaceholder;
     } else if (typeof window[options.customPlaceholder] === 'function') {
       // user custom function
-      options.customPlaceholder = window[options.customPlaceholder];      
+      options.customPlaceholder = window[options.customPlaceholder];
     } else {
       if (typeof options.customPlaceholder !== 'function') {
         throw new TypeError(
-          `Laravel-Tel-Input: Undefined function '${options.customPlaceholder}' specified in tel-input.options.customPlaceholder.`
+            `Laravel-Tel-Input: Undefined function '${options.customPlaceholder}' specified in tel-input.options.customPlaceholder.`
         );
       }
       delete options.customPlaceholder; // unset if undefined function
@@ -121,15 +121,14 @@
 
     // init the tel input
     const itiPhone = window.intlTelInput(telInput, options);
-   
+
 
     // countrychange event function
-    const countryChangeEventFunc = function () { 
-      
-      let countryData = itiPhone.getSelectedCountryData();  
+    const countryChangeEventFunc = function () {
+      let countryData = itiPhone.getSelectedCountryData();
       if (countryData.iso2) {
-          setCookie(IntlTelInputSelectedCountryCookie, countryData.iso2?.toUpperCase());
-              
+        setCookie(IntlTelInputSelectedCountryCookie, countryData.iso2?.toUpperCase());
+
         // phone country input data
         if (this.dataset.phoneCountryInput && countryData.iso2) {
           const phoneCountryInput = document.querySelector(this.dataset.phoneCountryInput);
@@ -149,8 +148,8 @@
             phoneDialCodeInput.value = countryData.dialCode;
             if (phoneDialCodeInput.value !== oldValue || phoneDialCodeInput.value != '') {
               phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
-            }  
-          }      
+            }
+          }
         }
         // once country change trigger change event on the telephone input
         telInput.dispatchEvent(new KeyboardEvent('change'));
@@ -161,14 +160,14 @@
     const telInputChangeEventFunc = function () {
       // phone input data
       if (this.dataset.phoneInput) {
-        const phoneInput = document.querySelector(this.dataset.phoneInput);    
-        if (phoneInput) {  
+        const phoneInput = document.querySelector(this.dataset.phoneInput);
+        if (phoneInput) {
           let oldValue = phoneInput.value?.trim();
           if (oldValue != '' && oldValue.charAt(0) != '+'  && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
             oldValue = `+${oldValue}`;
             phoneInput.value = oldValue;
           }
-          if (itiPhone.getNumber()?.trim() != '') {          
+          if (itiPhone.getNumber()?.trim() != '') {
             if (itiPhone.isValidNumber()) {
               phoneInput.value = itiPhone.getNumber();
             } else {
@@ -176,9 +175,9 @@
             }
           } else {
             if (oldValue != '' && itiPhone.isValidNumber() === null) {
-              itiPhone.setNumber(oldValue);        
+              itiPhone.setNumber(oldValue);
               phoneInput.value = itiPhone.getNumber();
-            }        
+            }
           }
           if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
             phoneInput.dispatchEvent(new KeyboardEvent('change'));
@@ -189,12 +188,12 @@
                 number: itiPhone.getNumber(),
                 country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
                 countryName: itiPhone.getSelectedCountryData().name,
-                dialCode: itiPhone.getSelectedCountryData().dialCode            
+                dialCode: itiPhone.getSelectedCountryData().dialCode
               }
             }));
           } else {
             if (itiPhone.isValidNumber() === false) {
-              phoneInput.dispatchEvent(new KeyboardEvent('change'));  
+              phoneInput.dispatchEvent(new KeyboardEvent('change'));
               phoneInput.dispatchEvent(new CustomEvent('telchange', {
                 detail: {
                   valid: false,
@@ -202,17 +201,19 @@
                   number: itiPhone.getNumber(),
                   country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
                   countryName: itiPhone.getSelectedCountryData().name,
-                  dialCode: itiPhone.getSelectedCountryData().dialCode            
+                  dialCode: itiPhone.getSelectedCountryData().dialCode
                 }
               }));
             }
           }
         }
-      }    
+      }
     }
 
     // Listen the tel inputs events
+    telInput.removeEventListener('countrychange', countryChangeEventFunc);
     telInput.addEventListener('countrychange', countryChangeEventFunc);
+    telInput.removeEventListener('change', telInputChangeEventFunc);
     telInput.addEventListener('change', telInputChangeEventFunc);
 
     // listen and sync phone number with tel input if any
@@ -223,34 +224,39 @@
         if (oldValue != '' && oldValue.charAt(0) != '+' && oldValue.charAt(0) != '0') {
           oldValue = `+${oldValue}`;
         }
-        phoneInput.addEventListener('change', function () {
+
+        const changeHandler = function () {
           let newValue = this.value?.trim();
           if (newValue != oldValue && newValue != '') {
             itiPhone.setNumber(newValue);
           }
-        });
+        };
+        phoneInput.removeEventListener('change', changeHandler);
+        phoneInput.addEventListener('change', changeHandler);
       }
     }
     // listen and sync phone country with tel input if any
     if (telInput.dataset.phoneCountryInput) {
       const phoneCountryInput = document.querySelector(telInput.dataset.phoneCountryInput);
       if (phoneCountryInput) {
-        phoneCountryInput.addEventListener('change', function () {
+        const changeHandler = function () {
           itiPhone.setCountry(this.value?.trim());
-        });
+        };
+        phoneCountryInput.removeEventListener('change', changeHandler);
+        phoneCountryInput.addEventListener('change', changeHandler);
       }
     }
 
     // After each intlTelInput instance has been created, fix issues with pre-filled values by dispatching change event on the country dropdown
     telInput.dispatchEvent(new KeyboardEvent('countrychange'));
     // Fix issues working on page with Turbolinks enabled
-    document.addEventListener("turbolinks:load", function() { 
+    document.addEventListener("turbolinks:load", function() {
       if (telInput) {
         telInput.dispatchEvent(new KeyboardEvent('countrychange'));
       }
     });
     // Fix issues working on page with Turbo enabled
-    document.addEventListener("turbo:load", function() { 
+    document.addEventListener("turbo:load", function() {
       if (telInput) {
         telInput.dispatchEvent(new KeyboardEvent('countrychange'));
       }
@@ -270,7 +276,7 @@
     if (telInputs.length > 0) {
       for (let i = 0; i < telInputs.length; i++) {
         initTelInput(telInputs[i], telInputconfig);
-      } 
+      }
     }
   }
 
@@ -283,12 +289,14 @@
       renderTelInput();
     });
 
-    // Livewire event hook 
+    // Livewire event hook
     if (window.Livewire) {
-      window.Livewire.hook('component.initialized', component => {
-        renderTelInput();
+      window.Livewire.hook('element.initialized', (el, component) => {
+        if (el.classList.contains('iti--laravel-tel-input')) {
+          renderTelInput();
+        }
       });
     }
   });
-  // 
+  //
 })();
