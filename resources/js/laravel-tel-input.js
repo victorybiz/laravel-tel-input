@@ -157,7 +157,7 @@
       }
     }
 
-    // countrychange event function
+    // tel input change event function
     const telInputChangeEventFunc = function () {
       // phone input data
       if (this.dataset.phoneInput) {
@@ -182,6 +182,7 @@
           }
           if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
             phoneInput.dispatchEvent(new KeyboardEvent('change'));
+            phoneInput.dispatchEvent(new KeyboardEvent('input'));
             phoneInput.dispatchEvent(new CustomEvent('telchange', {
               detail: {
                 valid: true,
@@ -195,6 +196,7 @@
           } else {
             if (itiPhone.isValidNumber() === false) {
               phoneInput.dispatchEvent(new KeyboardEvent('change'));  
+              phoneInput.dispatchEvent(new KeyboardEvent('input'));  
               phoneInput.dispatchEvent(new CustomEvent('telchange', {
                 detail: {
                   valid: false,

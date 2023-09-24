@@ -28,7 +28,8 @@ Laravel Telephone Input component for Blade and Livewire based on the [intl-tel-
   - [Usage](#usage)
         - [Basic usage](#basic-usage)
         - [Add hidden phone-country-input](#add-hidden-phone-country-input)
-        - [Usage with Livewire](#usage-with-livewire)
+        - [Usage with Livewire 2](#usage-with-livewire-2)
+        - [Usage with Livewire 3](#usage-with-livewire-3)
         - [Sync tel-input wih a country dropdown](#sync-tel-input-wih-a-country-dropdown)
         - [Event Listener](#event-listener)
   - [Props / Attributes](#props--attributes)
@@ -151,10 +152,21 @@ Please refer to the [intl-tel-input readme](https://github.com/jackocnr/intl-tel
 />
 <input type="hidden" id="phone_country" name="phone_country">
 ```
-##### Usage with Livewire
+##### Usage with Livewire 2
 ```html
 <x-tel-input
   wire:model="phone"
+  id="phone"
+  name="phone"
+  class="form-input"
+/> 
+<input wire:model="phone_country" type="hidden" id="phone_country" name="phone_country">
+```
+##### Usage with Livewire 3
+```html
+<x-tel-input
+  wire:model.live="phone"
+  value="{{ $phone }}"
   id="phone"
   name="phone"
   class="form-input"
@@ -246,7 +258,8 @@ input.addEventListener('telchange', function(e) {
           $this->showQuickContactForm = !$this->showQuickContactForm;
 
           if ($this->showQuickContactForm) {
-              $this->dispatchBrowserEvent('telDOMChanged');
+              $this->dispatchBrowserEvent('telDOMChanged'); // in Livewire 2
+              $this->dispatch('telDOMChanged'); // in Livewire 3
           }
       }
       //...
