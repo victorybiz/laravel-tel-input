@@ -278,17 +278,23 @@
 
   // Listen to the document events and re-render the tel inputs
   document.addEventListener("DOMContentLoaded", function() {
-    renderTelInput();
+    setTimeout(function () {
+      renderTelInput();
+    }, 5);
 
     // user dispatched browser events to re-render the tel inputs
     document.addEventListener("telDOMChanged", function() {
-      renderTelInput();
+      setTimeout(function () {
+        renderTelInput();
+      }, 5);
     });
 
     // Livewire event hook 
     if (window.Livewire) {
       window.Livewire.hook('component.initialized', component => {
-        renderTelInput();
+        setTimeout(function () {
+          renderTelInput();
+        }, 5);
       });
     }
   });
