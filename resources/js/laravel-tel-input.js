@@ -214,7 +214,9 @@
     }
 
     // Listen the tel inputs events
+    telInput.removeEventListener('countrychange', countryChangeEventFunc);
     telInput.addEventListener('countrychange', countryChangeEventFunc);
+    telInput.removeEventListener('change', telInputChangeEventFunc);
     telInput.addEventListener('change', telInputChangeEventFunc);
 
     // listen and sync phone number with tel input if any
@@ -225,21 +227,25 @@
         if (oldValue != '' && oldValue.charAt(0) != '+' && oldValue.charAt(0) != '0') {
           oldValue = `+${oldValue}`;
         }
-        phoneInput.addEventListener('change', function () {
+        const changeHandler = function () {
           let newValue = this.value?.trim();
           if (newValue != oldValue && newValue != '') {
             itiPhone.setNumber(newValue);
           }
-        });
+        }
+        phoneInput.removeEventListener('change', changeHandler);
+        phoneInput.addEventListener('change', changeHandler);
       }
     }
     // listen and sync phone country with tel input if any
     if (telInput.dataset.phoneCountryInput) {
       const phoneCountryInput = document.querySelector(telInput.dataset.phoneCountryInput);
       if (phoneCountryInput) {
-        phoneCountryInput.addEventListener('change', function () {
+        const changeHandler = function () {
           itiPhone.setCountry(this.value?.trim());
-        });
+        }
+        phoneCountryInput.removeEventListener('change', changeHandler);
+        phoneCountryInput.addEventListener('change', changeHandler);
       }
     }
 

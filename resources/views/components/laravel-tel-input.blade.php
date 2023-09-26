@@ -1,9 +1,11 @@
 {{-- Hidden phone input --}}
 <input
   type="hidden"
-  {{ $attributes->wire('model') }}
   id="{{ $id }}"
   name="{{ $name }}"
+  @if ($attributes->whereStartsWith('wire:model')->first())
+    {{ $attributes->wire('model') }}
+  @endif
   @if ($attributes->has('value'))
     value="{{ $attributes->get('value') }}"
   @endif
