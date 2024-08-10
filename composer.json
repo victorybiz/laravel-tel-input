@@ -1,5 +1,5 @@
 {
-    "name": "victorybiz/laravel-tel-input",
+    "name": "Geovanek/laravel-tel-input",
     "description": "Laravel Telephone Input component for Blade and Livewire based on the intl-tel-input JavaScript plugin. ",
     "keywords": [
         "victorybiz",
