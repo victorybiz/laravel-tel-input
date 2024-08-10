@@ -55,7 +55,7 @@
     const IntlTelInputSelectedCountryCookie = `IntlTelInputSelectedCountry_${telInput.dataset.phoneInputId}`;
 
     // allow each input to have its own initialCountry and geoIpLookup
-    window.intlTelInputGlobals.autoCountry = getCookie(IntlTelInputSelectedCountryCookie) || window.intlTelInputGlobals.autoCountry;
+    // window.intlTelInputGlobals.autoCountry = getCookie(IntlTelInputSelectedCountryCookie) || window.intlTelInputGlobals.autoCountry;
     // window.intlTelInputGlobals.startedLoadingAutoCountry = false;
 
     // fix autofill bugs on page refresh in Firefox
